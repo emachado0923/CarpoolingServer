@@ -32,6 +32,10 @@ var usuarioSchema = new Schema({
         type: String,
         required: true
     },
+    profile: {
+        type: String,
+        default: 'ninguno'
+    },
     created_at: {
         type: Date,
         default: Date.now
