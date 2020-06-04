@@ -53,10 +53,9 @@ let editar = (req, res) => {
         dirección: req.body.dirección,
         centro: req.body.centro,
         contraseña: bcrypt.hashSync(req.body.contraseña, 10)
-        
     }
 
-    Usuario.findByIdAndUpdate(req.params.id, usuario, {new: true}, (err, usuarioNew)=>{
+    Usuario.findByIdAndUpdate(req.params.id, {$set: usuario} , {new: true}, (err, usuarioNew)=>{
         if(err){
             return res.status(401).json({
                 ok: false,

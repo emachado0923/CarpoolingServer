@@ -30,11 +30,11 @@ var usuarioSchema = new Schema({
     },
     contraseña: {
         type: String,
-        required: true
+        required: false
     },
     profile: {
         type: String,
-        default: 'ninguno'
+        default: ''
     },
     created_at: {
         type: Date,

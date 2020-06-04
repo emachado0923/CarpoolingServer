@@ -3,8 +3,10 @@ const express = require('express');
 var app = express();
 
 //Usa la utenticación y el login
-app.use(require('../controllers/Auth/loginController'))
-app.use(require('../controllers/Auth/middlewares/Auth'))
+app.use(require('../controllers/Auth/loginController'));
+app.use(require('../controllers/Auth/middlewares/Auth'));
+
+
 
 //Url inicial
 app.get('/', function (req, res) {
