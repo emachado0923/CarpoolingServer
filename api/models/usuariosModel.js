@@ -36,6 +36,10 @@ var usuarioSchema = new Schema({
         type: String,
         default: ''
     },
+    vehiculo:{
+        type: Object,
+        required: false
+    },
     created_at: {
         type: Date,
         default: Date.now
