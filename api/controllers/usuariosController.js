@@ -14,6 +14,9 @@ let registrar = (req, res) => {
     let usuario = new Usuario({
         nombre: req.body.nombre,
         apellido: req.body.apellido,
+        tipo_doc: req.body.tipo_doc,
+        numero_doc: req.body.numero_doc,
+        celular: req.body.celular,
         correo: req.body.correo,
         dirección: req.body.dirección,
         centro: req.body.centro,
@@ -57,8 +60,8 @@ let editar = (req, res) => {
         contraseña: bcrypt.hashSync(req.body.contraseña, 10)
     }
 
-    Usuario.findByIdAndUpdate(req.params.id, {$set: usuario} , {new: true}, (err, usuarioNew)=>{
-        if(err){
+    Usuario.findByIdAndUpdate(req.params.id, { $set: usuario }, { new: true }, (err, usuarioNew) => {
+        if (err) {
             return res.status(401).json({
                 ok: false,
                 err
@@ -73,8 +76,8 @@ let editar = (req, res) => {
 
 let eliminar = (req, res) => {
 
-    Usuario.findByIdAndUpdate(req.params.id, {estado: req.params.estado}, {new: true}, (err, usuarioNew)=>{
-        if(err){
+    Usuario.findByIdAndUpdate(req.params.id, { estado: req.params.estado }, { new: true }, (err, usuarioNew) => {
+        if (err) {
             return res.status(401).json({
                 ok: false,
                 err

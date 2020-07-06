@@ -11,6 +11,18 @@ var usuarioSchema = new Schema({
         type: String,
         required: true
     },
+    tipo_doc:{
+        type: String,
+        required: true
+    },
+    numero_doc:{
+        type: Number,
+        required: true
+    },
+    celular:{
+        type: Number,
+        required: true
+    },
     correo: {
         type: String,
         required: true
@@ -30,7 +42,7 @@ var usuarioSchema = new Schema({
     },
     contraseña: {
         type: String,
-        required: false
+        required: true
     },
     profile: {
         type: String,
