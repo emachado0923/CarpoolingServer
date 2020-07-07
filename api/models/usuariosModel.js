@@ -11,15 +11,15 @@ var usuarioSchema = new Schema({
         type: String,
         required: true
     },
-    tipo_doc:{
+    tipo_doc: {
         type: String,
         required: true
     },
-    numero_doc:{
+    numero_doc: {
         type: Number,
         required: true
     },
-    celular:{
+    celular: {
         type: Number,
         required: true
     },
@@ -36,7 +36,7 @@ var usuarioSchema = new Schema({
         type: String,
         required: true
     },
-    centro:{
+    centro: {
         type: String,
         required: true
     },
@@ -48,9 +48,19 @@ var usuarioSchema = new Schema({
         type: String,
         default: ''
     },
-    vehiculo:{
-        type: Object,
-        required: false
+    vehiculo: {
+        marca: {
+            type: String,
+            required: false
+        },
+        color: {
+            type: String,
+            required: false
+        },
+        placa: {
+            type: String,
+            required: false
+        },
     },
     created_at: {
         type: Date,

@@ -21,7 +21,11 @@ let registrar = (req, res) => {
         dirección: req.body.dirección,
         centro: req.body.centro,
         profile: req.body.profile,
-        vehiculo: req.body.vehiculo,
+        vehiculo:{
+            marca: req.body.marca,
+            color: req.body.color,
+            placa: req.body.placa,
+        },
         contraseña: bcrypt.hashSync(req.body.contraseña, 10)
     });
 
