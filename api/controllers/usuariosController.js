@@ -8,6 +8,7 @@ let listar = (req, res) => {
             datos
         })
     })
+
 }
 
 let registrar = (req, res) => {
@@ -21,7 +22,7 @@ let registrar = (req, res) => {
         dirección: req.body.dirección,
         centro: req.body.centro,
         profile: req.body.profile,
-        vehiculo:{
+        vehiculo: {
             marca: req.body.marca,
             color: req.body.color,
             placa: req.body.placa,
@@ -61,15 +62,16 @@ let editar = (req, res) => {
         correo: req.body.correo,
         dirección: req.body.dirección,
         centro: req.body.centro,
-        contraseña: bcrypt.hashSync(req.body.contraseña, 10)
     }
 
-    Usuario.findByIdAndUpdate(req.params.id, { $set: usuario }, { new: true }, (err, usuarioNew) => {
+    Usuario.findByIdAndUpdate(req.params.id, {$set: usuario}, {new: true}, (err, usuarioNew) => {
         if (err) {
+            console.log(err)
             return res.status(401).json({
                 ok: false,
                 err
             });
+
         }
         return res.json({
             ok: true,
@@ -80,7 +82,7 @@ let editar = (req, res) => {
 
 let eliminar = (req, res) => {
 
-    Usuario.findByIdAndUpdate(req.params.id, { estado: req.params.estado }, { new: true }, (err, usuarioNew) => {
+    Usuario.findByIdAndUpdate(req.params.id, {estado: req.params.estado}, {new: true}, (err, usuarioNew) => {
         if (err) {
             return res.status(401).json({
                 ok: false,
@@ -94,10 +96,31 @@ let eliminar = (req, res) => {
     });
 }
 
+let IngresarFoto = async (req, res) => {
+
+    const {file} = req
+
+    if (file) {
+        try {
+            console.log(file)
+            await Usuario.findByIdAndUpdate(req.params.id, {foto: file.path}, {new: true})
+            res.json({message: 'Ingresado con exito'})
+
+        } catch (e) {
+
+            console.log('Error =' + e)
+            res.status(400).json(e)
+
+        }
+    } else {
+        res.status(400).json({error: 'no hay archivos'})
+    }
+}
 module.exports = {
     listar,
     registrar,
     ver,
     editar,
-    eliminar
+    eliminar,
+    IngresarFoto
 }

@@ -47,6 +47,8 @@ var usuarioSchema = new Schema({
     profile: {
         type: String,
         default: ''
+    }, foto: {
+        type: String,
     },
     vehiculo: {
         marca: {
