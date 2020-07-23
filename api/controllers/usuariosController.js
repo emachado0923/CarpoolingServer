@@ -11,7 +11,9 @@ let listar = (req, res) => {
 
 }
 
-let registrar = (req, res) => {
+let registrar =  ( req, res) => {
+    const {file} = req
+    console.log(req.file);
     let usuario = new Usuario({
         nombre: req.body.nombre,
         apellido: req.body.apellido,
@@ -27,7 +29,8 @@ let registrar = (req, res) => {
             color: req.body.color,
             placa: req.body.placa,
         },
-        contraseña: bcrypt.hashSync(req.body.contraseña, 10)
+        contraseña: bcrypt.hashSync(req.body.contraseña, 10),
+        foto: file.path
     });
 
     usuario.save((err, usuarioNew) => {
@@ -96,31 +99,30 @@ let eliminar = (req, res) => {
     });
 }
 
-let IngresarFoto = async (req, res) => {
+// let IngresarFoto = async (req, res) => {
 
-    const {file} = req
+//     const {file} = req
 
-    if (file) {
-        try {
-            console.log(file)
-            await Usuario.findByIdAndUpdate(req.params.id, {foto: file.path}, {new: true})
-            res.json({message: 'Ingresado con exito'})
+//     if (file) {
+//         try {
+//             await Usuario.findByIdAndUpdate(req.params.id, {foto: file.path}, {new: true})
+//             res.json({message: 'Ingresado con exito'})
 
-        } catch (e) {
+//         } catch (e) {
 
-            console.log('Error =' + e)
-            res.status(400).json(e)
+//             console.log('Error =' + e)
+//             res.status(400).json(e)
 
-        }
-    } else {
-        res.status(400).json({error: 'no hay archivos'})
-    }
-}
+//         }
+//     } else {
+//         res.status(400).json({error: 'no hay archivos'})
+//     }
+// }
 module.exports = {
     listar,
     registrar,
     ver,
     editar,
     eliminar,
-    IngresarFoto
+    // IngresarFoto
 }

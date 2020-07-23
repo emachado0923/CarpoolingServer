@@ -5,13 +5,13 @@ var router = express.Router();
 
 router.get('/usuario', usuarioController.listar);
 
-router.post('/usuario', usuarioController.registrar);
+router.post('/usuario',  multer.single('foto'), usuarioController.registrar);
 
 router.get('/usuario/:id', usuarioController.ver);
 
 router.put('/usuario/:id', usuarioController.editar);
 
-router.put('/usuario/foto/:id', multer.single('foto'), usuarioController.IngresarFoto)
+// router.put('/usuario/foto/:id', multer.single('foto'), usuarioController.IngresarFoto)
 
 router.delete('/usuario/:id/:estado', usuarioController.eliminar);
 
