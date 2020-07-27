@@ -7,6 +7,8 @@ router.get('/usuario', usuarioController.listar);
 
 router.post('/usuario',  multer.single('foto'), usuarioController.registrar);
 
+router.post('/foto', multer.single('foto'), usuarioController.registrarFoto);
+
 router.get('/usuario/:id', usuarioController.ver);
 
 router.put('/usuario/:id', usuarioController.editar);

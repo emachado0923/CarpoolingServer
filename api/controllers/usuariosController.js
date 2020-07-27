@@ -30,7 +30,7 @@ let registrar =  ( req, res) => {
             placa: req.body.placa,
         },
         contraseña: bcrypt.hashSync(req.body.contraseña, 10),
-        foto: file.path
+        foto: req.body.foto
     });
 
     usuario.save((err, usuarioNew) => {
@@ -45,6 +45,13 @@ let registrar =  ( req, res) => {
             usuario: usuarioNew
         });
     });
+}
+
+let registrarFoto = (req,res)=>{
+    res.json({
+        ok: true
+    })
+    console.log('Registrar foto')
 }
 
 
@@ -121,6 +128,7 @@ let eliminar = (req, res) => {
 module.exports = {
     listar,
     registrar,
+    registrarFoto,
     ver,
     editar,
     eliminar,
