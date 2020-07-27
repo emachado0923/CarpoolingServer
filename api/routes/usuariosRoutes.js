@@ -5,7 +5,7 @@ var router = express.Router();
 
 router.get('/usuario', usuarioController.listar);
 
-router.post('/usuario',  multer.single('foto'), usuarioController.registrar);
+router.post('/usuario', usuarioController.registrar);
 
 router.post('/foto', multer.single('foto'), usuarioController.registrarFoto);
 

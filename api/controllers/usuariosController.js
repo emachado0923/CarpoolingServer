@@ -11,9 +11,8 @@ let listar = (req, res) => {
 
 }
 
-let registrar =  ( req, res) => {
-    const {file} = req
-    console.log(req.file);
+let registrar = (req, res) => {
+    console.log('Body foto--->', req.body.foto);
     let usuario = new Usuario({
         nombre: req.body.nombre,
         apellido: req.body.apellido,
@@ -47,11 +46,18 @@ let registrar =  ( req, res) => {
     });
 }
 
-let registrarFoto = (req,res)=>{
-    res.json({
-        ok: true
-    })
-    console.log('Registrar foto')
+let registrarFoto = (req, res) => {
+    if (req.file.filename) {
+        return res.json({
+            ok: true,
+            name: req.file.filename
+        })
+    } else {
+        return res.json({
+            ok: false,
+            name: ''
+        })
+    }
 }
 
 
@@ -74,7 +80,7 @@ let editar = (req, res) => {
         centro: req.body.centro,
     }
 
-    Usuario.findByIdAndUpdate(req.params.id, {$set: usuario}, {new: true}, (err, usuarioNew) => {
+    Usuario.findByIdAndUpdate(req.params.id, { $set: usuario }, { new: true }, (err, usuarioNew) => {
         if (err) {
             console.log(err)
             return res.status(401).json({
@@ -92,7 +98,7 @@ let editar = (req, res) => {
 
 let eliminar = (req, res) => {
 
-    Usuario.findByIdAndUpdate(req.params.id, {estado: req.params.estado}, {new: true}, (err, usuarioNew) => {
+    Usuario.findByIdAndUpdate(req.params.id, { estado: req.params.estado }, { new: true }, (err, usuarioNew) => {
         if (err) {
             return res.status(401).json({
                 ok: false,
