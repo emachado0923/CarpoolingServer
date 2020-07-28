@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 const Usuarios = require('../../models/usuariosModel');
 
-singIn.post('/login', (req, res) => {
+singIn.post('/api/login', (req, res) => {
 
     let data = req.body;
     // let sql = `select * from jl_user_admin where usuario = '${data.user}' and password = '${data.pass}'` ;
