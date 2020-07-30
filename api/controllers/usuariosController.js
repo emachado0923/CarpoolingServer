@@ -70,16 +70,63 @@ let ver = (req, res) => {
     })
 }
 
+// let editarFoto = async (req, res) => {
 
-let editar = (req, res) => {
+//     const { file } = req
+
+//     if (file) {
+//         try {
+//             await Usuario.findByIdAndUpdate(req.params.id, { foto: file.path }, { new: true })
+//             res.json({ message: 'Ingresado con exito' })
+
+//         } catch (e) {
+
+//             console.log('Error =' + e)
+//             res.status(400).json(e)
+
+//         }
+//     } else {
+//         res.status(400).json({ error: 'no hay archivos' })
+//     }
+// }
+
+let editarPasajero = (req, res) => {
     let usuario = {
         nombre: req.body.nombre,
         apellido: req.body.apellido,
-        correo: req.body.correo,
+        celular: req.body.celular,
         dirección: req.body.dirección,
         centro: req.body.centro,
+        // contraseña: bcrypt.hashSync(req.body.contraseña, 10),
     }
-
+    Usuario.findByIdAndUpdate(req.params.id, { $set: usuario }, { new: true }, (err, usuarioNew) => {
+        if (err) {
+            console.log(err)
+            return res.status(401).json({
+                ok: false,
+                err
+            });
+        }
+        return res.json({
+            ok: true,
+            usuarioNew
+        })
+    });
+}
+let editarConductor = (req, res) => {
+    let usuario = {
+        nombre: req.body.nombre,
+        apellido: req.body.apellido,
+        celular: req.body.celular,
+        dirección: req.body.dirección,
+        centro: req.body.centro,
+        vehiculo: {
+            marca: req.body.marca,
+            color: req.body.color,
+            placa: req.body.placa,
+        },
+        // contraseña: bcrypt.hashSync(req.body.contraseña, 10),
+    }
     Usuario.findByIdAndUpdate(req.params.id, { $set: usuario }, { new: true }, (err, usuarioNew) => {
         if (err) {
             console.log(err)
@@ -111,32 +158,12 @@ let eliminar = (req, res) => {
         })
     });
 }
-
-// let IngresarFoto = async (req, res) => {
-
-//     const {file} = req
-
-//     if (file) {
-//         try {
-//             await Usuario.findByIdAndUpdate(req.params.id, {foto: file.path}, {new: true})
-//             res.json({message: 'Ingresado con exito'})
-
-//         } catch (e) {
-
-//             console.log('Error =' + e)
-//             res.status(400).json(e)
-
-//         }
-//     } else {
-//         res.status(400).json({error: 'no hay archivos'})
-//     }
-// }
 module.exports = {
     listar,
     registrar,
     registrarFoto,
     ver,
-    editar,
+    editarPasajero,
+    editarConductor,
     eliminar,
-    // IngresarFoto
 }

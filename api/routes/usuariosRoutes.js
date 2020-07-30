@@ -11,7 +11,9 @@ router.post('/foto', multer.single('foto'), usuarioController.registrarFoto);
 
 router.get('/usuario/:id', usuarioController.ver);
 
-router.put('/usuario/:id', usuarioController.editar);
+router.put('/pasajero/:id', usuarioController.editarPasajero);
+
+router.put('/conductor/:id', usuarioController.editarConductor);
 
 // router.put('/usuario/foto/:id', multer.single('foto'), usuarioController.IngresarFoto)
 
