@@ -15,7 +15,7 @@ router.put('/pasajero/:id', usuarioController.editarPasajero);
 
 router.put('/conductor/:id', usuarioController.editarConductor);
 
-// router.put('/usuario/foto/:id', multer.single('foto'), usuarioController.IngresarFoto)
+router.put('/foto/:id', multer.single('foto'), usuarioController.editarFoto);
 
 router.delete('/usuario/:id/:estado', usuarioController.eliminar);
 
